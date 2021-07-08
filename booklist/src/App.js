@@ -10,7 +10,7 @@ import Shelf from './Components/Shelf';
 class App extends Component{
   constructor(){
     super()
-  
+
     this.state = { 
         books: data,
         shelf: [],
@@ -20,7 +20,8 @@ class App extends Component{
   }
 
   addToShelf(val){
-    this.setState({ addBook: val})
+    // alert(val)
+    this.setState({ shelf: [...this.state.shelf, val]})
   }
 
   searchBook = (searchInput) => {
@@ -30,18 +31,36 @@ class App extends Component{
     this.setState ({books: [...newBooks] })
     }
 
-    
+reset(){
+  this.setState({ books: data })
+}
 
   render() {
     return (
-      <div>
+<>
+      <div className="Header">
       <Header/>
-      <Search searchBook={this.searchBook}/>
+      </div>
+
+      <div className="Search"> 
+      <Search searchBook={this.searchBook}
+      reset ={this.reset}
+      />
+      </div>
+
+      <div className= 'image-container'>
       <BookList booklist={this.state.books}
        addToShelf= {this.addToShelf}
       />
+      
+       <div className="Shelf">
       <Shelf shelfArr= {this.state.shelf}/>
       </div>
+      </div>
+
+     
+
+</>
     )
   }
 }

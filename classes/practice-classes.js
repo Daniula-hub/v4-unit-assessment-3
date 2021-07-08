@@ -75,9 +75,9 @@ const ralph = new NPC ( 'Ralph', 'human', 'Niceland', `I'm gonna wreck it!`);
 
 //CODE HERE
 
-const ralphsInfo = 'getInfo()';
-const ralphsDialogue = 'dialogue()';
-const ralphsLocation =  'location';
+const ralphsInfo = ralph.getInfo();
+const ralphsDialogue = ralph.dialogue();
+const ralphsLocation =  ralph.location;
 
 //////////////////PROBLEM 3////////////////////
 
@@ -105,25 +105,25 @@ const ralphsLocation =  'location';
 //CODE HERE
 
 class Player extends Character {
-  constructor (name, type, location, phrase, healthLevel, attackLevel ){
-    super (name, type, location, phrase)
+  constructor (name, type, healthLevel, attackLevel ){
+    super(name, type)
     this.healthLevel= healthLevel;
     this.attackLevel = attackLevel;
   }
 
 defend(amount){
-//  this.healthLevel-amount;
-//   if (this.healthLevel < 0 ){
-//    this.attackStrength = amount;
-//    this.remainingHealth = 
-//    this.message = `${this.name} is still in the fight!`
- 
-
+ this.healthLevel-=amount;
+  if (this.healthLevel > 0){
+    return {
+      attackStrength: amount,
+      remainingHealth: this.healthLevel,
+      message: `${this.name} is still in the fight!`
+     } 
+    } else {
+      return `${this.name} has been defeated!`
+    }
+  } 
 }
-}
-
-
-
 
 
 /*
@@ -148,8 +148,8 @@ const ozai = new Player ('Ozai', 'firebender', 100, 0);
 
 //CODE HERE
 
-const battle = ozai (aang.attackLevel);
-// console.log(battle)
+const battle = ozai.defend(aang.attackLevel);
+
 
 //////////////////PROBLEM 4////////////////////
 
@@ -169,20 +169,20 @@ const battle = ozai (aang.attackLevel);
 
 //CODE HERE
 
-// class Hero extends Player {
-//   constructor (name, type, location, phrase, healthLevel, attackLevel, superPowers){
-//     super (name, type, location, phrase, healthLevel, attackLevel)
-//     this.superPowers = [];
-//    }
+class Hero extends Player {
+  constructor (name, type, healthLevel, attackLevel){
+    super (name, type, healthLevel, attackLevel)
+    this.superPowers = [];
+   }
 
-//    addSuperPower(power){
-//    this.superPowers.push(power);
-//    }
+   addSuperPower(power){
+   this.superPowers.push(power);
+   }
 
-//    useSuperPower(number){
-//     return `${this.name} used ${this.power}!`
-//    }
-
+   useSuperPower(index){
+    return `${this.name} used ${this.superPowers[index]}!`
+   }
+  }
 /*
   Create a hero named 'Fire Spitter' whose type is 'dragon'. 
   Fire Spitter's healthLevel and attackLevels should both be 5000. 
@@ -194,5 +194,8 @@ const battle = ozai (aang.attackLevel);
 
 //CODE HERE
 
-const fireSpitter = new Hero('Fire Spitter', 'dragon',  5000,  5000, addSuperPower('spitting fire', 'walk on top of water', 'transform into other animals') );
-let fireSpitterAttack = useSuperPower(0);
+const fireSpitter = new Hero('Fire Spitter', 'dragon',  5000,  5000);
+fireSpitter.addSuperPower('spitting fire');;
+fireSpitter.addSuperPower('yellow');
+fireSpitter.addSuperPower('black');
+let fireSpitterAttack = fireSpitter.useSuperPower(0);

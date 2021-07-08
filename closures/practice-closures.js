@@ -39,14 +39,14 @@
   //CODE HERE
 
   function lightSwitch (){
-    return function (){
       var isTheLightOn = false;
-    }
-    function flipTheSwitch (){
-      if ( isTheLightOn = true ){
-        return 'The light is on'
+    return function flipTheSwitch (){
+      if (isTheLightOn === true ){
+        isTheLightOn = false
+        return 'The light is off'
       } else {
-         return  'The light is off'
+        isTheLightOn = true
+         return  'The light is on'
       }
     }
   }
@@ -56,6 +56,7 @@
   //CODE HERE
 
   let kitchenSwitch = lightSwitch();
+  console.log(kitchenSwitch)
   
   //Invoke kitchenSwitch.
 
@@ -95,7 +96,7 @@
       let height = 12;
 
 function readInfo(){
-return `This is a ${plant} that is ${height} inches tall.`
+return `This is a ${plant} plant that is ${height} inches tall.`
 }
 
 function waterPlant(){
@@ -137,11 +138,14 @@ return products;
 }
 
 function addToProducts(shoes){
-this.products.push(shoes);
+products.push(shoes);
 }
 
-function deleteFromProducts(index){
-  this.products.splice(index, 1);
+function deleteFromProducts(string){
+let index= products.findIndex((element)=> {
+return element === string
+})
+products.splice(index, 1);
 
 }
 
@@ -164,10 +168,10 @@ return{
   */
 
   //CODE HERE
-  function addToProducts(tennis){
-    this.products.push(tennis);
-    }
+  shoes.addToProducts('tennis');
+  
 
 
 
-    let books = inventory();
+    // let books = inventory();
+    // books.deleteFromProducts(i);
